@@ -23,6 +23,8 @@
 | `channel/SCRIPT_STRUCTURE.md` | 대본 공통 골격 | /script |
 | `channel/CALENDAR.md` | 발행 캘린더 | /schedule |
 | `channel/plans/YYYY-MM-DD-주제.md` | 영상별 기획안 | /video-plan |
+| `channel/plans/YYYY-MM-DD-주제-답변.md` | 인터뷰 질문 답변 원문 (대본 재료, 다듬지 않고 보존) | /script |
+| `channel/plans/YYYY-MM-DD-주제-대본.md` | 완성 대본 | /script |
 | `channel/output/` | 자막(SRT), 쇼츠 클립, 썸네일 이미지 등 산출물 | 각 스킬 |
 
 폴더가 없으면 `mkdir -p`로 만들고 진행한다.
@@ -35,6 +37,7 @@
 - `whisper_subtitles.py` — 영상/음성 → SRT 자막 (whisper, ffmpeg 필요)
 - `silence_detect.py` — 영상 → 무음 구간 타임코드 목록, `--cut`으로 자동 컷편집 (ffmpeg 필요)
 - `shorts_cut.py` — 영상 + 타임코드 → 쇼츠 클립 추출, `--vertical`로 9:16 크롭 (ffmpeg 필요)
+- `script_timer.py` — 대본 파일 → 섹션별 글자수·예상 러닝타임·누적 타임코드 (설치 필요 없음)
 
 필요한 도구(yt-dlp, ffmpeg, whisper)가 설치 안 되어 있으면 사용자에게 물어보고 직접 설치해 준다.
 설치 명령은 `docs/INSTALL.md` 참고.
@@ -44,4 +47,5 @@
 - 썸네일·제목 후보는 `templates/THUMBNAIL_FORMULAS.md`의 5대 심리 공식에 근거하고, 각 후보에 어떤 공식을 썼는지 표시한다.
 - 기획안은 `templates/PLANNING_TEMPLATE.md` 양식을 따른다.
 - 대본은 사용자의 기존 말투·톤을 유지한다. `channel/SCRIPT_STRUCTURE.md`와 `channel/BRAND.md`의 톤 정의를 따른다.
+- 대본은 `templates/SCRIPT_TEMPLATE.md` 양식을 따르고, 저장 전에 `scripts/script_timer.py`로 러닝타임을 기획안의 예상 길이와 맞춘다.
 - 일반론이 아니라 이 채널의 데이터(FORMULA.md, COMPETITORS.md)에 근거해서 제안한다.
