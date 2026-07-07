@@ -23,6 +23,8 @@
 | `channel/SCRIPT_STRUCTURE.md` | 대본 공통 골격 | /script |
 | `channel/CALENDAR.md` | 발행 캘린더 | /schedule |
 | `channel/plans/YYYY-MM-DD-주제.md` | 영상별 기획안 | /video-plan |
+| `channel/comments/YYYY-MM-DD-주제.md` | 영상별 댓글 분석 (FAQ·아이디어·답글 초안) | /comments |
+| `channel/reports/YYYY-MM-DD-리포트.md` | 발행 후 성과 리포트 | /report |
 | `channel/output/` | 자막(SRT), 쇼츠 클립, 썸네일 이미지 등 산출물 | 각 스킬 |
 
 폴더가 없으면 `mkdir -p`로 만들고 진행한다.
@@ -32,6 +34,7 @@
 `scripts/` 폴더의 파이썬 스크립트는 모두 `python3 scripts/<이름>.py --help`로 사용법을 확인할 수 있다.
 
 - `channel_data.py` — 채널 URL → 전체 영상 메타데이터 CSV (yt-dlp 필요)
+- `comments_data.py` — 영상 URL → 댓글+답글 CSV (yt-dlp 필요)
 - `whisper_subtitles.py` — 영상/음성 → SRT 자막 (whisper, ffmpeg 필요)
 - `silence_detect.py` — 영상 → 무음 구간 타임코드 목록, `--cut`으로 자동 컷편집 (ffmpeg 필요)
 - `shorts_cut.py` — 영상 + 타임코드 → 쇼츠 클립 추출, `--vertical`로 9:16 크롭 (ffmpeg 필요)
