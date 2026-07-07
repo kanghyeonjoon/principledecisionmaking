@@ -1,0 +1,20 @@
+# 개인 채널 데이터 (공개 리포에 올라가면 안 됨)
+channel/
+
+# 파이썬
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 영상·음성·자막 작업 파일
+*.mp4
+*.mov
+*.mkv
+*.mp3
+*.wav
+*.srt
+
+# OS
+.DS_Store
+Thumbs.db
