@@ -37,7 +37,7 @@
 - `whisper_subtitles.py` — 영상/음성 → SRT 자막 (whisper, ffmpeg 필요)
 - `silence_detect.py` — 영상 → 무음 구간 타임코드 목록, `--cut`으로 자동 컷편집 (ffmpeg 필요)
 - `shorts_cut.py` — 영상 + 타임코드 → 쇼츠 클립 추출, `--vertical`로 9:16 크롭 (ffmpeg 필요)
-- `script_timer.py` — 대본 파일 → 섹션별 글자수·예상 러닝타임·누적 타임코드 (설치 필요 없음)
+- `script_timer.py` — 대본 파일 → 섹션별 글자수·예상 러닝타임·누적 타임코드, `--chapters`로 유튜브 챕터 초안 (설치 필요 없음)
 
 필요한 도구(yt-dlp, ffmpeg, whisper)가 설치 안 되어 있으면 사용자에게 물어보고 직접 설치해 준다.
 설치 명령은 `docs/INSTALL.md` 참고.

@@ -7,6 +7,7 @@
     python3 scripts/script_timer.py 대본.md --target 10        # 목표 10분과 비교
     python3 scripts/script_timer.py 대본.md --target 8:30      # 목표 8분 30초
     python3 scripts/script_timer.py 대본.md --cpm 330          # 말이 빠른 편이면 분당 글자수 조절
+    python3 scripts/script_timer.py 대본.md --chapters         # 유튜브 챕터 타임스탬프 초안 출력
 
 계산에서 빠지는 것: 제목(#), 인용문(>), 표(|), 체크박스, [대괄호 안 화면 지시],
 '촬영 메모' 이후 섹션. 즉 실제로 입으로 말하는 글자만 셉니다.
@@ -67,6 +68,16 @@ def timecode(seconds):
     return f"{m:d}:{s:02d}"
 
 
+def chapter_title(title):
+    """섹션 제목에서 챕터용 텍스트만 남긴다: (시간 표시)·🎬·[지시]·'본문 N —' 제거"""
+    t = re.sub(r"\([^)]*\)", "", title)
+    t = t.replace("🎬", "")
+    t = re.sub(r"\[[^\]]*\]", "", t)
+    t = re.sub(r"^본문\s*\d+\s*[—–\-]\s*", "", t)
+    t = t.strip(" -—–")
+    return t or title.strip()
+
+
 def analyze(path, cpm):
     text = Path(path).read_text(encoding="utf-8")
     # 코드펜스 표시(```)만 지우고 내용은 살린다 (기획안 인트로가 펜스 안에 있는 경우)
@@ -115,6 +126,8 @@ def main():
                         help="분당 말하는 글자수 (기본 300, 말이 빠르면 330~350)")
     parser.add_argument("--target", default=None,
                         help="목표 길이 (예: 10, 8:30, 8분 30초). 안 주면 파일 안의 '예상 러닝타임'을 찾아서 씁니다")
+    parser.add_argument("--chapters", action="store_true",
+                        help="유튜브 설명란에 붙일 챕터 타임스탬프 초안을 출력합니다")
     args = parser.parse_args()
 
     if not Path(args.file).exists():
@@ -126,6 +139,16 @@ def main():
 
     total_chars = sum(c for _, c in sections)
     total_sec = total_chars / args.cpm * 60
+
+    if args.chapters:
+        print("\n📎 챕터 타임스탬프 초안 (설명란에 붙여넣기)")
+        print("   ⚠️  대본 기준 추정치예요. 편집 후 실제 영상 시간에 맞게 조정하세요.\n")
+        cum = 0.0
+        for title, chars in sections:
+            print(f"{timecode(cum)} {chapter_title(title)}")
+            cum += chars / args.cpm * 60
+        print()
+        return
 
     print(f"\n📖 {args.file}  (분당 {args.cpm}자 기준)\n")
     print(f"{'시작':>6}  {'섹션':<28} {'글자수':>6}  {'길이':>6}")
