@@ -22,8 +22,8 @@ from pathlib import Path
 
 
 def parse_time(t):
-    """'00:01:23', '1:23', '83', '83.5' 모두 초 단위 숫자로 변환."""
-    t = str(t).strip()
+    """'00:01:23', '1:23', '83', '83.5', SRT식 '00:01:23,456' 모두 초 단위 숫자로 변환."""
+    t = str(t).strip().replace(",", ".")
     if re.fullmatch(r"[\d.]+", t):
         return float(t)
     parts = t.split(":")
