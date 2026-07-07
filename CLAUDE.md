@@ -47,5 +47,5 @@
 - 썸네일·제목 후보는 `templates/THUMBNAIL_FORMULAS.md`의 5대 심리 공식에 근거하고, 각 후보에 어떤 공식을 썼는지 표시한다.
 - 기획안은 `templates/PLANNING_TEMPLATE.md` 양식을 따른다.
 - 대본은 사용자의 기존 말투·톤을 유지한다. `channel/SCRIPT_STRUCTURE.md`와 `channel/BRAND.md`의 톤 정의를 따른다.
-- 대본은 `templates/SCRIPT_TEMPLATE.md` 양식을 따르고, 저장 전에 `scripts/script_timer.py`로 러닝타임을 기획안의 예상 길이와 맞춘다.
+- 대본은 `templates/SCRIPT_TEMPLATE.md` 양식을 따르고, 저장한 뒤 `scripts/script_timer.py`로 러닝타임이 기획안의 예상 길이와 맞을 때까지 고친다.
 - 일반론이 아니라 이 채널의 데이터(FORMULA.md, COMPETITORS.md)에 근거해서 제안한다.
